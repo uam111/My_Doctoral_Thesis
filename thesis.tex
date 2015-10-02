@@ -1,0 +1,28 @@
+\tableofcontents                %% this produces the table of contents - you might have guessed :-)
+
+% enable the following if you really want a list of figure -- usually not needed
+%\listoffigures
+
+\mainmatter                     %% KOMA: marks main part using arabic page numbers and such; only available in scrbook
+
+
+% some example chapters -- remove when you have your own written
+\input{examples/example-short-chapter}   %% remove this line to get rid of the example chapter
+\input{examples/example-style-chapter}   %% remove this line to get rid of the style chapter
+
+%% include tex file chapters here:
+% \input{thanks}                %% this is a suggestion: you have to create this file on demand
+% \input{foreword}              %% this is a suggestion: you have to create this file on demand
+% \include{introduction}        %% this is a suggestion: you have to create this file on demand
+% \include{problem}             %% this is a suggestion: you have to create this file on demand
+% \include{solution}            %% this is a suggestion: you have to create this file on demand
+% \include{evaluation}          %% this is a suggestion: you have to create this file on demand
+% \include{outlook}             %% this is a suggestion: you have to create this file on demand
+
+% in some cases an appendix is desired/needs -- uncomment if needed
+%\appendix                       %% closes main document, appendix follows until end; only available in book-classes
+%\addpart*{Appendix}             %% adding Appendix to tableofcontents
+
+% this will generate the references -- pretty much always needed
+\printbibliography              %% remove, if using BibTeX instead of biblatex
+% \include{further_ressources}  %% this is a suggestion: you have to create this file on demand
