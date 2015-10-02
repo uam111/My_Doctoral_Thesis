@@ -38,12 +38,14 @@ all: pdf
 
 #help	pdf	creates a pdf file using pdflatex
 .PHONY: pdf
-pdf:
+pdf: $(MAINDOCUMENTBASENAME).pdf
+
+$(MAINDOCUMENTBASENAME).pdf: $(MAINDOCUMENTFILENAME) *.tex
 	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
 	-${BIBTEX_CMD} ${MAINDOCUMENTBASENAME}
 	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
 	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
-	-mv ${MAINDOCUMENTBASENAME}.pdf ${DATESTAMP_AND_PROJECT}.pdf
+	-ln -f ${MAINDOCUMENTBASENAME}.pdf ${DATESTAMP_AND_PROJECT}.pdf || mv ${MAINDOCUMENTBASENAME}.pdf ${DATESTAMP_AND_PROJECT}.pdf
 
 #help	wc	counts the words from the PDF generated
 wc:	pdf
@@ -65,7 +67,7 @@ view: pdf
 #help	clean	clean up temporary files
 .PHONY: clean
 clean: 
-	-rm -r *.bcf *.run.xml _*_.* *~ *.aux *-blx.bib *.bbl ${MAINDOCUMENTBASENAME}.dvi *.ps *.blg *.idx *.ilg *.ind *.toc *.log *.log *.brf *.out *.lof *.lot *.gxg *.glx *.gxs *.glo *.gls *.tdo -f
+	-rm -r *.bcf *.run.xml _*_.* *~ *.aux *-blx.bib *.bbl ${MAINDOCUMENTBASENAME}.dvi *.ps *.blg *.idx *.ilg *.ind *.toc *.log *.log *.brf *.out *.lof *.lot *.gxg *.glx *.gxs *.glo *.gls *.tdo $(MAINDOCUMENTBASENAME).pdf -f
 
 #help	purge	cleaner than clean ;-)
 .PHONY: purge
