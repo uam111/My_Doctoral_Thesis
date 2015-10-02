@@ -1,4 +1,20 @@
 
+* Preface
+
+This is a modified version of [[https://github.com/novoid/LaTeX-KOMA-template][this thesis template]]. It has been adjusted for use in German/English theses at the Institute of Psychology II, OvG University Magdeburg. In principle, it can be used as described in the original documentation (below). However, be aware of the following differences:
+
+- the bibliography files are in the `bib/` folder
+- there should be no need to edit `main.tex` all your own writing starts in `thesis.tex`
+
+Here is how you start:
+
+- `git clone` this repository (best) or download it as a [[https://github.com/novoid/LaTeX-KOMA-template/archive/master.zip][ZIP file]] and extract it.
+- enter the directory with the extracted content, and edit the file `projectname.txt`: this should be a single word that serves as a label for your thesis. The default is `thesis`, if that is OK, there is no need to edit anything.
+- next edit the file `metadata.tex`, read through its content, select a language and fill in the relevant fields.
+
+Afterwards you should be able to build a PDF by running `make pdf` in a terminal.
+
+
 * LaTeX-KOMA-template
 
 ** Purpose of this project
