@@ -1,0 +1,76 @@
+\begin{titlepage}
+\begin{center}
+\includegraphics[width=50mm]{figures/ovgu_nat_logo}
+~
+\vfill\vfill\vfill
+
+\sffamily
+
+\myauthor\\
+{\footnotesize (\myid)}\\
+
+\bigskip
+\vfill
+
+{\LARGE\bfseries\mytitle}
+
+{\large\bfseries\mysubtitle}
+
+\vfill\vfill\vfill\vfill
+
+{\normalsize\bfseries\myworktitle}\\
+\vfill
+zur Erlangung des akademischen Grades\\
+{\mygrade}\\
+in\\
+{\mystudy}\\
+\bigskip
+\vfill
+eingereicht an der\\
+{\normalsize\bfseries\myuniversity}\\
+\medskip
+\myfaculty\\
+\smallskip
+\myinstitute\\
+
+
+\vfill\vfill\vfill
+\vfill\vfill\vfill
+
+Betreuer\\
+\mysupervisor\\
+\vfill
+Mitbetreuer\\
+\mycosupervisor\\
+\vfill
+\vfill
+
+\vfill
+
+
+\vfill\vfill\vfill
+
+{\scriptsize\mysubmissiontown, \mysubmissionmonth~\mysubmissionyear}
+
+\end{center}
+\end{titlepage}
+
+%% if myaddcolophon is set to "true", colophon is added:
+\ifthenelse{\boolean{myaddcolophon}}{
+  \newpage
+  \thispagestyle{empty}  %% no page header or footer
+
+  ~
+  \vfill
+  \mycolophon
+}{}
+\newpage
+
+%% end of title page
+%%% Local Variables:
+%%% mode: latex
+%%% mode: auto-fill
+%%% mode: flyspell
+%%% eval: (ispell-change-dictionary "en_US")
+%%% TeX-master: "../main"
+%%% End:

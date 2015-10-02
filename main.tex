@@ -7,6 +7,7 @@
 %%
 %%      Karl Voit
 %%
+%% modified by Michael Hanke for OvGU
 
 %% ========================================================================
 %%%% Basic settings
@@ -45,7 +46,7 @@
 %% e.g., 10pt, 11pt, 12pt
 %% The font size of the main text in pt (points).
 
-\newcommand{\mylinespread}{1.0}
+\newcommand{\mylinespread}{1.1}
 %% e.g., 1.0, 1.5, 2.0
 %% Line spacing in %/100. For example 1.5 means 150% of the usual line
 %% spacing. Please use with caution: 100% ("1.0") is fine because the
@@ -78,7 +79,7 @@
 \newcommand{\mybiblatexfile}{bib/references-biblatex.bib}
 %% Name of the biblatex file that holds the references.
 
-\newcommand{\mydispositioncolor}{30,103,182}
+\newcommand{\mydispositioncolor}{0,0,0}
 %% e.g., "30,103,182" (blue/turquois), "0,0,0" (black), ...
 %% Color of the headings and so forth in RGB (red,green,blue) values.
 %% NOTE: if you are using "0,0,0" for black, printers might still
@@ -92,7 +93,7 @@
 \newcommand{\mycolorlinks}{true}  %% "true" or "false"
 %% Enables or disables colored links (hyperref package).
 
-\newcommand{\mytitlepage}{template/title_Thesis_TU_Graz}
+\newcommand{\mytitlepage}{template/title_thesis_ovgu_psych}
 %% Your own or one of following pre-defined title pages:
 %% "template/title_plain_maketitle": simple maketitle page
 %% "template/title_Diplomarbeit_KF_Uni_Graz.tex": fancy (german) title page for KF Uni Graz
@@ -113,13 +114,13 @@
 %% Load main settings for document preamble:
 \input{template/preamble}%% DO NOT REMOVE THIS LINE!
 
-\setboolean{myaddcolophon}{true}  %% "true" or "false"
+\setboolean{myaddcolophon}{false}  %% "true" or "false"
 %% If set to "true": a colophon (with notes about this document
 %% template, LaTeX, ...) is added after the title page.
 %% Please do not set to "false" without a good reason. The colophon
 %% helps your readers to get in touch with LaTeX and to find this template.
 
-\setboolean{myaddlistoftodos}{false}  %% "true" or "false"
+\setboolean{myaddlistoftodos}{true}  %% "true" or "false"
 %% If set to "true": the current list of open todos is added after the
 %% table of contents. If \mytodonotesoptions is set to "disable", no
 %% list of todos is added, independent of this setting here.
@@ -196,14 +197,13 @@
 
 %% if myaddlistoftodos is set to "true", the current list of open todos is added:
 \ifthenelse{\boolean{myaddlistoftodos}}{
-  \newpage\listoftodos          %% handy if you are using todonotes with \todo{}
+  \newpage\listoftodos\newpage  %% handy if you are using todonotes with \todo{}
 }{}                             %% with todonotes-package option "disable" you can get rid of any todo in the output
 
-\input{template/declaration_TU_Graz}  %% Statutory Declaration
+\input{template/declaration_ovgu}  %% Statutory Declaration
 
 %% include the abstract without chapter number but include it on table of contents:
 \cleardoublepage
-\addcontentsline{toc}{chapter}{Abstract}
 \include{abstract}              %% Abstract
 
 \input{thesis}
