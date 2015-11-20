@@ -1,0 +1,112 @@
+%%%% Time-stamp: <2012-08-20 17:41:39 vk>
+
+%% example text content
+%% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
+%% scrbook starts with part (optional), chapter, section, ...
+\chapter{Introduction}
+The term multivariate pattern (MVP) analysis summarizes a range of data
+analysis strategies that are highly suitable for studying neural
+representations encoded in distributed patterns of brain activity
+\citep{haxby_2012}. While there is an ever increasing number of publications
+that demonstrate the power of MVP analysis for functional magnetic resonance
+imaging (fMRI) data \citep{opdebeeck_2010,freeman_2011,alink_2013,freeman_2013}
+with standard resolution data (a voxel size of about \mm{2-3} isotropic), MVP
+analysis is especially promising in the context of high-resolution fMRI.
+Ongoing technological improvements, such as ultra high-field MRI scanners
+(\sevenT\ or higher) have pushed the resolution for fMRI to a level
+that is slowly approaching the spatial scale of the columnar organization of
+the brain \citep{yacoub_2008,heidemann_2012}. Being able to use fMRI to sample
+brain activity patterns at a near-columnar level makes it feasible to employ
+MVP analysis with the aim to decode distributed neural representations of an
+entire cortical field at a level of detail that is presently only accessible to
+invasive recording techniques with limited spatial coverage. However, at this
+point, it is unclear which spatial resolution is most suitable for decoding
+neural representation from fMRI data with MVP analysis. While higher
+resolutions can improve the fidelity of the BOLD signal by, for example,
+reducing the partial volume effect \citep{Weibull_2008}, the benefits can be
+counteracted by physiological noise (such as inevitable motion) and lower tSNR. 
+This raises the question: does the decoding of neural representations continuously improve
+with increasing spatial resolution, or is there an optimal resolution for a
+given type of representation?
+
+In this study, we aim to address this question for the most frequently employed
+MVP analysis technique: a cross-validated classification analysis, where a
+classifier is repeatedly trained to distinguish patterns of brain activation
+from fMRI data of a set of stimulus conditions, and its prediction accuracy is
+evaluated against a left-out data portion \citep{pereira_2009}. Moreover, we
+focus on the decoding of the representation of oriented visual gratings in
+primary visual cortex. This is likely to be the most extensively studied
+paradigm regarding the application of MVP analysis on fMRI data, starting with
+the classic studies of  \citet{kamitani_2005} and \citet{haynes_2005}. It was
+shown that orientation can be decoded reliably at resolutions ranging from
+standard \mm{3} isotropic voxels in the aforementioned studies, to \mm{1}
+\citep{swisher_2010}, and that it is possible to directly model orientation
+columns in V1 with \sevenT\ fMRI of \mm{0.5$\times$0.5} (in-plane) resolution
+\citep{yacoub_2008,ugurbil_2012}. These findings led to a debate on the origin
+and the spatial scale of the signals that classifiers can use to learn to
+discriminate different orientations
+\citep{opdebeeck_2010,swisher_2010,alink_2013,freeman_2013}. To investigate
+these questions, the authors typically acquired high-resolution fMRI and
+simulated a lower-resolution acquisition by applying spatial filters to the
+original data in order to compare metrics, such as prediction accuracy, across
+a range of spatial frequencies \citep[see][]{swisher_2010}.  However, this
+approach has not gone unchallenged as it is unclear to what degree particular
+filtering strategies \citep[e.g. Gaussian filtering vs. low-pass filtering in
+the spatial frequency domain, see][]{misaki_2013} can effectively simulate the
+properties of fMRI recorded at a lower physical resolution, where a change in
+slice thickness alone can significantly alter image contrast. Despite this
+criticism, we are not aware of any study that has compared the performance of
+orientation decoding in visual cortex across a range of physical acquisition
+resolutions.
+
+In this study, we provide empirical data on the effect of spatial acquisition
+resolution on the decoding of visual orientation from high field (\sevenT)
+fMRI. We recorded BOLD fMRI data at \mm{0.8}, \mm{1.4}, \mm{2} and \mm{3} voxel
+size while participants were visually stimulated with oriented phase-flickering
+gratings using a uniform event-related paradigm.
+% optimal resolution
+These data enable estimation of the \textit{optimal acquisition resolution} for
+orientation decoding from \sevenT\ fMRI.  \citet{chaimow_2011} investigated the
+decoding of the stimulated hemifield using simulated \threeT\ fMRI data based
+on a model of ocular dominance columns. They found that a resolution of \mm{3}
+was optimal for decoding and performance decreased with higher or lower
+resolution.  As it is known that in monkeys the organization of orientation
+columns is characterized by higher spatial frequencies than ocular dominance
+columns \citep{obermayer_1993}, we expect any optimal resolution for
+orientation decoding to be higher than \mm{3}. Moreover, the BOLD point-spread
+function (PSF) at \sevenT\ is known to be considerably smaller than at \threeT\
+\citep[\mm{$\approx$2.3} FWHM vs.  \mm{$\approx$3.5} FWHM][]{shmuel_2007,
+engel_1997} which should further increase the optimal resolution for decoding
+at \sevenT.
+% filtering
+Multi-resolution data also allow for evaluating \textit{filtering strategies}
+used in previous studies in terms of their validity regarding the simulation of
+lower-resolution fMRI acquisitions from high-resolution data.
+% aliasing
+These data also enable the investigation of the \textit{role of aliasing} of a
+high spatial-frequency signal (beyond the Nyquist frequency) into a
+lower frequency range sampled by fMRI voxels \citep[sometimes referred to as
+“hyperacuity”;][]{swisher_2010,opdebeeck_2010}, as, in the case of spatial
+aliasing, the frequency bands carrying an orientation-selective signal would
+vary with the sampling resolution of fMRI.
+% veins
+Lastly, we collected high-resolution susceptibility weighted imaging data for
+blood-vessel localization in order to investigate the \textit{role of large
+draining veins} that may carry orientation-selective signals reflected in low
+spatial frequency components when sampled by millimeter range voxels
+\citep{kamitani_2005,kriegeskorte_2007,shmuel_2010, gardner_2010}. In
+combination with the multi-resolution fMRI data, we can investigate the effect
+of this potential signal source on the orientation decoding at various levels
+of spatial scale.
+
+
+
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
+%%% Local Variables: 
+%%% mode: latex
+%%% mode: auto-fill
+%%% mode: flyspell
+%%% eval: (ispell-change-dictionary "en_US")
+%%% TeX-master: "main"
+%%% End: 
