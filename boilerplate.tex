@@ -1,0 +1,115 @@
+%-*- mode: latex; fill-column: 70 -*-
+% ex: set sts=4 ts=4 sw=4 et tw=70:
+
+%\documentclass[preprint,authoryear,12pt]{elsarticle}
+\documentclass[authoryear,12pt]{thesis}
+
+\usepackage[sort&compress,square,comma,authoryear]{natbib}
+% we need umlauts in the refs
+\usepackage[utf8]{inputenc}
+\usepackage[usenames,dvipsnames]{color}
+
+%\usepackage{authblk}
+%\renewcommand\Affilfont{\itshape\small}
+\usepackage{graphicx}
+%\usepackage[authoryear]{natbib}
+%\usepackage{endfloat}
+% nicer units
+\usepackage{units}
+% better tables
+\usepackage{booktabs}
+% Some colorings for the tables
+%\usepackage[table]{xcolor}
+\usepackage{todonotes}
+
+\graphicspath{{pics/}}
+
+\usepackage[mathlines]{lineno}
+
+\usepackage{amsmath,amssymb}
+\usepackage{textcomp}
+% final page layout with reasonable margins
+\usepackage{geometry}
+\geometry{top=2cm, bottom=2.5cm, left=3cm, right=3cm}
+
+\usepackage[hyperfootnotes=false,
+pdftitle={},
+pdfauthor={},
+pdfsubject={Paper submitted to ".
+  Authors' Copyright 2015, all rights reserved},
+pdfkeywords={},
+pdfduplex=DuplexFlipLongEdge,
+pdffitwindow=true,
+pdfdisplaydoctitle=true,
+debug=false,
+final=true,
+hyperfigures=true,
+pdfborder={0 0 0}]{hyperref}
+
+%\input{draft-mark}
+
+% howto cite projects
+\newcommand{\purl}[2]{#1\footnote{\url{#2}}}
+
+\newcommand{\sevenT}{\unit[7]{Tesla}}
+\newcommand{\threeT}{\unit[3]{Tesla}}
+\newcommand{\mm}[1]{\unit[#1]{mm}}
+\newcommand{\seconds}[1]{\unit[#1]{s}}
+\newcommand{\bandofinterest}{\unit[$\approx$5-8]{mm}}
+
+%% Miscellaneous Latin abbreviations emphasizing
+%% according to
+%% http://en.wikipedia.org/wiki/List_of_Latin_phrases_(C-E)#endnote_egie
+%% ``American style guides tend to recommend that "e.g."  and "i.e."
+%% should generally be followed by a comma, just as "for example" and
+%% "that is" would be; UK style tends to omit the comma''
+\newcommand{\ie}[0]{\emph{i.e.},\ }
+\newcommand{\eg}[0]{\emph{e.g.},\ }
+\newcommand{\etc}[0]{\emph{etc.}}
+
+%% Unified references
+\newcommand{\fig}[1]{{Figure~\ref{fig:#1}}}
+
+% Cross-referencing (comment out if forbidden)
+\newcommand{\msec}[1]{Section~\ref{sec:#1}}
+\newcommand{\mtab}[1]{Table~\ref{tab:#1}}
+\newcommand{\msecs}[2]{Sections~\ref{sec:#1} and~\ref{sec:#2}}
+\newcommand{\beginsupplement}{%
+        \pagebreak
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+     }
+\newcommand{\mylanguage}{ngerman, american}
+
+%% general metadata:
+\newcommand{\myauthor}{Ayan Sengupta}  %% also used for PDF metadata (hyperref)
+\newcommand{\myid}{206221} %% Matrikelnummer/Student ID
+\newcommand{\mytitle}{TITLE}  %% also used for PDF metadata (hyperref)
+\newcommand{\mysubtitle}{SUBTITLE}  %% also used for PDF metadata (hyperref)
+\newcommand{\mysubject}{SUBJECT}  %% also used for PDF metadata (hyperref)
+\newcommand{\mykeywords}{KEYWORDS}  %% also used for PDF metadata (hyperref)
+\newcommand{\mysupervisor}{Dr.Stefan Pollmann} %% your supervisor
+\newcommand{\mycosupervisor}{Dr.Michael Hanke} %% your supervisor
+\newcommand{\mysubmissionmonth}{November} %% month you are handing in
+\newcommand{\mysubmissionyear}{2015} %% year you are handing in
+\newcommand{\mysubmissiontown}{Magdeburg} %% town of handing in
+
+% 1st in English: German below (un)comment according to needs
+%% this information is used only for generating the title page:
+%\newcommand{\myworktitle}{Master's Thesis}  %% official type of work like ``Master theses''
+%\newcommand{\mygrade}{Master of Science} %% title you are getting with this work like ``Master of ...''
+%\newcommand{\mystudy}{Psychology} %% your study like ``Arts''
+%\newcommand{\myuniversity}{Otto-von-Guericke-University} %% your university/school
+%\newcommand{\myfaculty}{Fakulty of Natural Sciences} %% affiliation
+%\newcommand{\myinstitute}{Institute of Psychology II} %% affiliation
+
+%% 2nd German
+%%% this information is used only for generating the title page:
+\newcommand{\myworktitle}{Doctoral Thesis}  %% official type of work like ``Master theses''
+\newcommand{\mygrade}{Doctor rerum naturalium} %% title you are getting with this work like ``Master of ...''
+\newcommand{\mystudy}{Experimental Psychology} %% your study like ``Arts''
+\newcommand{\myuniversity}{Otto-von-Guericke-Universit\"at} %% your university/school
+\newcommand{\myfaculty}{Fakult\"at f\"ur Naturwissenschaften} %% affiliation
+\newcommand{\myinstitute}{Institut f\"ur Psychologie II} %% affiliation

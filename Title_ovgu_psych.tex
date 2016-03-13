@@ -1,0 +1,53 @@
+\pagenumbering{roman}
+\thispagestyle{empty}
+\ifnum\numcomm<4 \vglue .5in\vfil \fi  % masters
+\ifnum\numcomm>5 \hbox{ } \vspace{-24pt}\fi % make more space on page
+\begin{singlespace}
+\begin{center}
+    {\LARGE\bfseries\mytitle}
+
+    {\large\bfseries\mysubtitle}
+
+    \vfill\vfill\vfill\vfill
+
+    {\normalsize\bfseries\myworktitle}\\
+    \vfill
+    %\IfLanguageName{ngerman}{zur Erlangung des akademischen Grades}{in fulfilment of the requirements of the degree}\\
+    zur Erlangung des akademischen Grades
+    {\mygrade}\\
+    in\\
+    {\mystudy}\\
+    \bigskip
+    \vfill
+    %\IfLanguageName{ngerman}{eingereicht an der}{submitted to}\\
+    eingereicht an der
+    {\normalsize\bfseries\myuniversity}\\
+    \medskip
+    \myfaculty\\
+    \smallskip
+    \myinstitute\\
+
+
+    \vfill\vfill\vfill
+    \vfill\vfill\vfill
+
+    %\IfLanguageName{ngerman}{Betreuer}{Supervisor}\\
+    Betreuer :
+    \mysupervisor\\
+    \vfill
+    %\IfLanguageName{ngerman}{Mitbetreuer}{Co-Supervisor}\\
+    Mitbetreuer :
+    \mycosupervisor\\
+    \vfill
+    \vfill
+
+    \vfill
+
+
+    \vfill\vfill\vfill
+
+    {\scriptsize\mysubmissiontown, \mysubmissionmonth~\mysubmissionyear}
+\end{center}
+\end{singlespace}
+\newpage
+\pagestyle{plain}

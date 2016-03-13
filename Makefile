@@ -1,111 +1,48 @@
-## please modify the following line for naming the end products (PDFs, ZIPs, ...)
-PROJECTNAME = "$(shell cat projectname.txt)"
+SRC=p.tex dib_7t.tex
 
-## -----------------------------------------
-##       DO NOT EDIT BELOW THIS LINE
-## -----------------------------------------
+all: pics thesis.pdf
+thesis.pdf: boilerplate.tex thesis.bbl
+thesis.odt: thesis.pdf
+	/usr/share/tex4ht/oolatex thesis.tex '' '' '' '-interaction=nonstopmode'
 
-## Makefile von Karl Voit (Karl@Voit.net)
+pics:
+	$(MAKE) -C pics
 
-## some Makefile-hints taken from: 
-## http://www.ctan.org/tex-archive/help/uk-tex-faq/Makefile
-
-
-MAINDOCUMENTBASENAME = main
-MAINDOCUMENTFILENAME = ${MAINDOCUMENTBASENAME}.tex
-## COMMANDS:
-PDFLATEX_CMD = pdflatex
-#BIBTEX_CMD = bibtex
-BIBTEX_CMD = biber
-MAKEIDX_CMD = makeindex
-DATESTAMP = `/bin/date +%Y-%m-%d`
-DATESTAMP_AND_PROJECT = ${DATESTAMP}_${PROJECTNAME}
-#PDFVIEWER = xpdf
-PDFVIEWER = acroread
-TEMPLATEDOCUBASENAME = Template-Documentation
-TEMPLATEDOCUFILE = ${TEMPLATEDOCUBASENAME}.tex
-
-#help
-#helpThe main targets of this Makefile are:
-#help	help	this help
-.PHONY: help
-help:
-	@sed -n 's/^#help//p' < Makefile
-
-#help	all	see "pdf"
-.PHONY: all
-all: pdf
-
-#help	pdf	creates a pdf file using pdflatex
-.PHONY: pdf
-pdf: $(MAINDOCUMENTBASENAME).pdf
-
-$(MAINDOCUMENTBASENAME).pdf: $(MAINDOCUMENTFILENAME) *.tex
-	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
-	-${BIBTEX_CMD} ${MAINDOCUMENTBASENAME}
-	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
-	${PDFLATEX_CMD} ${MAINDOCUMENTFILENAME}
-	-ln -f ${MAINDOCUMENTBASENAME}.pdf ${DATESTAMP_AND_PROJECT}.pdf || mv ${MAINDOCUMENTBASENAME}.pdf ${DATESTAMP_AND_PROJECT}.pdf
-
-#help	wc	counts the words from the PDF generated
-wc:	pdf
-	pdftops ${DATESTAMP_AND_PROJECT}.pdf
-	ps2ascii ${DATESTAMP_AND_PROJECT}.ps > ${DATESTAMP_AND_PROJECT}.txt
-	wc -w ${DATESTAMP_AND_PROJECT}.txt
+clean::
+	rm -f revision.log
+	$(MAKE) -C pics clean
+	-rm -f *.4ct *.4tc *.idv *.lg *.tmp p.odt *.xref
 
 
-# --------------------------------------------------------
+#
+# Private parts: do not touch!
+#
+pdf: $(SRC:.tex=.pdf) $(SRC:.rst=.pdf)
+bib: $(SRC:.tex=.bbl)
 
-#help	view	view the PDF-file
-.PHONY: view
-view: pdf
-	${PDFVIEWER} *_${PROJECTNAME}.pdf
+TEXFLAGS += -interaction=nonstopmode
+PDFLATEX=TEXINPUTS=.:sty:$(TETEXSRC): pdflatex $(TEXFLAGS) -shell-escape
+BSTDIR = sty
+%.pdf %.aux: %.tex $(MSRC)
+	rm -f $*.log
+	@run=0; while ( [ ! -e "$*.log" ] || grep -q "Rerun to get" "$*.log" ) && [ $$run -lt 5 ]; do \
+	     echo "** Re-running pdftex. Run $$run **";    \
+		 $(PDFLATEX) $< >/dev/null 2>&1 || cat $*.log; \
+		 run=$$(($$run+1)); \
+    done
 
-# --------------------------------------------------------
+BIBTEX = bibtex
+%.bbl: %.aux
+	env BIBINPUTS=$(BIBDIR): BSTINPUTS=$(BSTDIR): $(BIBTEX) $(BIBFLAGS) $*
 
-
-#help	clean	clean up temporary files
-.PHONY: clean
-clean: 
-	-rm -r *.bcf *.run.xml _*_.* *~ *.aux *-blx.bib *.bbl ${MAINDOCUMENTBASENAME}.dvi *.ps *.blg *.idx *.ilg *.ind *.toc *.log *.log *.brf *.out *.lof *.lot *.gxg *.glx *.gxs *.glo *.gls *.tdo $(MAINDOCUMENTBASENAME).pdf -f
-
-#help	purge	cleaner than clean ;-)
-.PHONY: purge
-purge: clean
-	-rm 20*.pdf *.ps -f
-
-#help	force	force rebuild next run
-.PHONY: force
-force:
-	touch *tex
-
-# TOOLS:
-
-#help	zip	create ZIP-file
-.PHONY: zip
-zip: purge pdf clean
-	zip -r ../${PROJECTNAME}_${TIMESTAMP}.zip *
-
-.PHONY: publish
-publish: templatedocu pdf clean
-	-rm 20*.pdf ${TEMPLATEDOCUFILE} -f
-	git status
-
-#help	templatedocu	updates tex-files for the documentation of this template
-#help			needs: echo, sed, grep
-.PHONY: templatedocu
-templatedocu:
-	grep "%doc%" template/preamble.tex | sed 's/^.*%doc% //' > ${TEMPLATEDOCUFILE}
-	grep "%doc%" template/mycommands.tex | sed 's/^.*%doc% //' >> ${TEMPLATEDOCUFILE}
-	grep "%doc%" template/typographic_settings.tex | sed 's/^.*%doc% //' >> ${TEMPLATEDOCUFILE}
-	grep "%doc%" template/pdf_settings.tex | sed 's/^.*%doc% //' >> ${TEMPLATEDOCUFILE}
-	echo "%%---------------------------------------%%" >>${TEMPLATEDOCUFILE}
-	echo "\printbibliography\end{document}" >>${TEMPLATEDOCUFILE}
-	${PDFLATEX_CMD} ${TEMPLATEDOCUFILE}
-	${PDFLATEX_CMD} ${TEMPLATEDOCUFILE}
-	${BIBTEX_CMD} ${TEMPLATEDOCUBASENAME}
-	${PDFLATEX_CMD} ${TEMPLATEDOCUFILE}
+## Helper if interested in providing proper version tag within the manuscript
+ASRC=$(SRC) $(MSRC) $(SSRC)
+cleanexts=dvi aux bbl blg end ps pdf djvu log idx toc lot lof ttt tpt fff out nav snm vrb cb cb2
+clean::
+	rm -f $(foreach file,$(ASRC:.tex=) $(ASRC:.rst=),$(addprefix $(file)., $(cleanexts))) $(MISCTRASH) *~
+	rm -f comment.cut
+	rm -f revision.tex texput.log
+	rm -f $(CODE_TEX) code.sty $(CODE:.py=-snippet*.*)
 
 
-#end
-
+.PHONY: pics
